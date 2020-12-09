@@ -15,12 +15,13 @@ long * res_f;
 /* Test case a: Allocates 100 small objects size of 8 bytes */
 void *test1(void *data){
     long tid = (long) data;
-    void* ptr[100];
+    long* ptr[100];
     int iter;
     clock_t start = clock();
     void * start_addr = tc_thread_init();
     for (iter = 0; iter < 100; iter++)
         ptr[iter] = tc_malloc(8);
+    *ptr[50] = 1000;
     clock_t clocks = clock() - start;
     *(res_a + tid) = clocks;
     for (iter = 0; iter < 100; iter++)
